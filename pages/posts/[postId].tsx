@@ -22,10 +22,14 @@ interface commenstTypes {
   id: number;
 }
 
-const PostPage: React.FC = () => {
+const PostPage = () => {
   const router: Router = useRouter();
 
-  const [state, setState] = useState<StateTypes>();
+  const [state, setState] = useState<StateTypes>({
+    title: "",
+    body: "",
+    id: 0,
+  });
   console.log(state);
   useEffect(() => {
     axios
@@ -44,7 +48,7 @@ const PostPage: React.FC = () => {
       <div>Title : {state.title && state.title}</div>
       <div>Body : {state.body && state.body}</div>
       <div>
-        Comments : {state.comments.length}
+        Comments : {state.comments && state.comments.length}
         {state.comments &&
           state.comments.map((comment) => (
             <div key={comment.postId}>{comment.body}</div>
