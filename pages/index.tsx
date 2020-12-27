@@ -1,14 +1,23 @@
+import Link from "next/link";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import styled from "styled-components";
+
 import MainLayout from "../components/MainLayout";
 import { requestPosts } from "../redux/action/action";
 import { RootStore } from "../redux/redux-store";
 import { PostsType } from "../redux/types/types";
 
+const Div = styled.div`
+  margin: 15px 10px;
+  padding: 5px 5px;
+  background: #fdfdfd;
+`;
+
 export default function latestPosts() {
   const dispatch = useDispatch();
   const state = useSelector((state: RootStore[]) => state.posts);
-  console.log(state);
+
   useEffect(() => {
     dispatch(requestPosts());
   }, []);
@@ -18,10 +27,14 @@ export default function latestPosts() {
       <h1>Hello Nest.js</h1>
 
       {state.posts.map((posts: PostsType) => (
-        <div key={posts.id}>
-          <div>{posts.title}</div>
-          <div>{posts.body}</div>
-        </div>
+        <Link href={`/posts/${posts.id}`}>
+          <a>
+            <Div key={posts.id}>
+              <div>Title : {posts.title}</div>
+              <div>Body : {posts.body}</div>
+            </Div>
+          </a>
+        </Link>
       ))}
     </MainLayout>
   );
