@@ -9,7 +9,7 @@ const MainLayout = ({ children, title = "Next app" }) => {
       <Head>
         <title>{title}</title>
         <meta charSet="UTF-8" />
-        <meta name="keywords" content="next, javascript,react,SSR" />
+        <meta name="keywords" content="Blogs, posts,friend,comments" />
         <meta name="description" content="this my test task" />
       </Head>
       <nav className={styles.nav}>

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import styles from "../../styles/index.module.css";
 
 import MainLayout from "../../components/MainLayout";
 
@@ -10,9 +11,9 @@ interface Router {
   };
 }
 interface StateTypes {
-  title?: string;
-  body?: string;
-  id?: number;
+  title: string;
+  body: string;
+  id: number;
   comments?: commenstTypes[];
 }
 
@@ -30,7 +31,6 @@ const PostPage = () => {
     body: "",
     id: 0,
   });
-  console.log(state);
   useEffect(() => {
     axios
       .get(
@@ -43,16 +43,22 @@ const PostPage = () => {
 
   return (
     <MainLayout title="Post Page">
-      <h1>Post page {router.query.postId}</h1>
-
-      <div>Title : {state.title && state.title}</div>
-      <div>Body : {state.body && state.body}</div>
-      <div>
-        Comments : {state.comments && state.comments.length}
-        {state.comments &&
-          state.comments.map((comment) => (
-            <div key={comment.postId}>{comment.body}</div>
-          ))}
+      <div className={styles.postId}>
+        <div className={styles.postId__item}>
+          Title : {state.title && state.title}
+        </div>
+        <div className={styles.postId__item}>
+          Body : {state.body && state.body}
+        </div>
+        <div>
+          Comments : {state.comments && state.comments.length}
+          {state.comments &&
+            state.comments.map((comment) => (
+              <div className={styles.postId__item} key={comment.postId}>
+                {comment.body}
+              </div>
+            ))}
+        </div>
       </div>
     </MainLayout>
   );

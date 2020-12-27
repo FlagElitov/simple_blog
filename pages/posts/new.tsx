@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import MainLayout from "../../components/MainLayout";
 import { postPosts } from "../../redux/action/action";
+import styles from "../../styles/index.module.css";
 
 export default function latestPosts() {
   const dispatch = useDispatch();
@@ -16,21 +17,23 @@ export default function latestPosts() {
 
   return (
     <MainLayout title="New Posts">
-      <h1>New Posts</h1>
+      <div className={styles.new__post}>
+        <h1>New Posts</h1>
 
-      <input
-        type="text"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        placeholder="Заголовок"
-      />
-      <input
-        type="text"
-        value={body}
-        onChange={(e) => setBody(e.target.value)}
-        placeholder="Введите текст"
-      />
-      <button onClick={handlePost}>Отправить</button>
+        <input
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="Заголовок"
+        />
+        <input
+          type="text"
+          value={body}
+          onChange={(e) => setBody(e.target.value)}
+          placeholder="Введите текст"
+        />
+        <button onClick={handlePost}>Отправить</button>
+      </div>
     </MainLayout>
   );
 }
