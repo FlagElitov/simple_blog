@@ -8,7 +8,7 @@ import {
 export interface initialStateT {
   loading: boolean;
   faile: boolean;
-  posts: PostsType[];
+  posts: PostsType[] | null;
 }
 
 export type PostsType = {

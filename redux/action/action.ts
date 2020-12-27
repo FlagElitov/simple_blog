@@ -7,7 +7,7 @@ export const REQUEST_POSTS = "REQUEST_POSTS";
 
 export const postsLoading = () => ({ type: POSTS_LOADING });
 export const postsFail = () => ({ type: POSTS_FAIL });
-export const postsSuccess = (payload: PostsType) => ({
+export const postsSuccess = (payload: PostsType[]) => ({
   type: POSTS_SUCCESS,
   payload,
 });

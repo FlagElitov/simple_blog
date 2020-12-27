@@ -4,7 +4,7 @@ import { PostsDispatchTypes, initialStateT } from "./../types/types";
 const initialState: initialStateT = {
   loading: false,
   faile: false,
-  posts: [] | null,
+  posts: [],
 };
 
 const PostsReducer = (
