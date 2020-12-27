@@ -12,6 +12,7 @@ const Div = styled.div`
   margin: 15px 10px;
   padding: 5px 5px;
   background: #fdfdfd;
+  border: 1px solid red;
 `;
 const Text = styled.div`
   text-decoration: none;
@@ -26,6 +27,8 @@ const latestPosts: React.FC = () => {
   const dispatch = useDispatch();
   const state: initialStateT = useSelector((state: RootStore[]) => state.posts);
 
+  const posts = state.posts.reverse();
+
   useEffect(() => {
     dispatch(requestPosts());
   }, []);
@@ -36,7 +39,7 @@ const latestPosts: React.FC = () => {
       {state.loading && "Загрузка!"}
       {state.faile && "Ошибка!"}
 
-      {state.posts.map((posts: PostsType) => (
+      {posts.map((posts: PostsType) => (
         <Link key={posts.id} href={`/posts/${posts.id}`}>
           <a>
             <Div>

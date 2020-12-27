@@ -10,10 +10,10 @@ interface Router {
   };
 }
 interface StateTypes {
-  title: string;
-  body: string;
-  id: number;
-  comments: commenstTypes[];
+  title?: string;
+  body?: string;
+  id?: number;
+  comments?: commenstTypes[];
 }
 
 interface commenstTypes {
@@ -25,7 +25,7 @@ interface commenstTypes {
 const PostPage: React.FC = () => {
   const router: Router = useRouter();
 
-  const [state, setState] = useState<StateTypes | undefined>();
+  const [state, setState] = useState<StateTypes>();
   console.log(state);
   useEffect(() => {
     axios
