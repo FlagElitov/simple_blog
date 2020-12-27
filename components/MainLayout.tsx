@@ -1,31 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
-import styled from "styled-components";
 
-const Nav = styled.nav`
-  position: fixed;
-  height: 60px;
-  background: #fdfdfd;
-  top: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: space-around;
-`;
-const Main = styled.nav`
-  margin-top: 80px;
-`;
-const LinkCSS = styled.div`
-  margin-left: 80px;
-  font-size: 26px;
-  cursor: pointer;
-  margin-top: 15px;
-  transition: 0.4s;
-  &:hover {
-    color: green;
-    transition: 0.4s;
-  }
-`;
+import styles from "../styles/index.module.css";
 
 const MainLayout = ({ children, title = "Next app" }) => {
   return (
@@ -36,20 +12,16 @@ const MainLayout = ({ children, title = "Next app" }) => {
         <meta name="keywords" content="next, javascript,react,SSR" />
         <meta name="description" content="this my test task" />
       </Head>
-      <Nav>
+      <nav className={styles.nav}>
         <Link href="/">
-          <LinkCSS>
-            <a>Latest Layout</a>
-          </LinkCSS>
+          <a className={styles.layout__items}>Latest Layout</a>
         </Link>
 
         <Link href="/posts/new">
-          <LinkCSS>
-            <a>Create Post</a>
-          </LinkCSS>
+          <a className={styles.layout__items}>Create Post</a>
         </Link>
-      </Nav>
-      <Main>{children}</Main>
+      </nav>
+      <main>{children}</main>
     </>
   );
 };

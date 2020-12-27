@@ -1,0 +1,32 @@
+.posts {
+  cursor: pointer;
+  padding: 5px 5px;
+  margin: 10px 30px;
+  background: #fdfdfd;
+}
+.posts__items {
+  font-size: 18px;
+  color: #000;
+  text-decoration: none;
+}
+
+.nav {
+  position: fixed;
+  height: 60px;
+  background: #fdfdfd;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+.layout__items {
+  margin-left: 80px;
+  font-size: 26px;
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: 0.4s;
+}
