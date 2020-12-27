@@ -14,9 +14,7 @@ const MainLayout = ({ children, title = "Next app" }) => {
         <Link href="/">
           <a>Latest Layout</a>
         </Link>
-        <Link href="/posts/1">
-          <a>Post page</a>
-        </Link>
+
         <Link href="/posts/new">
           <a>Create Post</a>
         </Link>

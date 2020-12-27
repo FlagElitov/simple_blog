@@ -13,8 +13,11 @@ const Div = styled.div`
   padding: 5px 5px;
   background: #fdfdfd;
 `;
+const Text = styled.div`
+  text-decoration: none;
+`;
 
-export default function latestPosts() {
+const latestPosts: React.FC = () => {
   const dispatch = useDispatch();
   const state = useSelector((state: RootStore[]) => state.posts);
 
@@ -30,12 +33,13 @@ export default function latestPosts() {
         <Link href={`/posts/${posts.id}`}>
           <a>
             <Div key={posts.id}>
-              <div>Title : {posts.title}</div>
-              <div>Body : {posts.body}</div>
+              <Text>Title : {posts.title}</Text>
+              <Text>Body : {posts.body}</Text>
             </Div>
           </a>
         </Link>
       ))}
     </MainLayout>
   );
-}
+};
+export default latestPosts;
