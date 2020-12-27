@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
@@ -15,6 +15,11 @@ const Div = styled.div`
 `;
 const Text = styled.div`
   text-decoration: none;
+  color: #000;
+`;
+const Blog = styled.h1`
+  text-decoration: none;
+  color: #000;
 `;
 
 const latestPosts: React.FC = () => {
@@ -27,7 +32,7 @@ const latestPosts: React.FC = () => {
 
   return (
     <MainLayout title="Latest Posts">
-      <h1>Hello Nest.js</h1>
+      <Blog>Blog</Blog>
       {state.loading && "Загрузка!"}
       {state.faile && "Ошибка!"}
 

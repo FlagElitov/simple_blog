@@ -10,27 +10,27 @@ export default function latestPosts() {
 
   const handlePost = () => {
     dispatch(postPosts(title, body));
+    setTitle("");
+    setBody("");
   };
 
   return (
     <MainLayout title="New Posts">
       <h1>New Posts</h1>
-      {title}
+
       <input
         type="text"
+        value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Заголовок"
       />
       <input
         type="text"
+        value={body}
         onChange={(e) => setBody(e.target.value)}
         placeholder="Введите текст"
       />
       <button onClick={handlePost}>Отправить</button>
-
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, cumque?{" "}
-      </p>
     </MainLayout>
   );
 }

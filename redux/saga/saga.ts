@@ -27,10 +27,6 @@ function* sagaWorkerGetPosts() {
   }
 }
 
-export default function* root() {
-  yield all([fork(sagaWatcherGetPosts), fork(sagaWatcherPost)]);
-}
-
 export function* sagaWatcherPost() {
   yield takeEveryUp(POST_POSTS, sagaWorkerPosts);
 }
@@ -44,4 +40,8 @@ function* sagaWorkerPosts({ title, body }: { title: string; body: string }) {
     );
     yield put(postsSuccess(payload.data));
   } catch (e) {}
+}
+
+export default function* root() {
+  yield all([fork(sagaWatcherGetPosts), fork(sagaWatcherPost)]);
 }

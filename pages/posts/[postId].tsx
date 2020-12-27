@@ -40,17 +40,16 @@ const PostPage: React.FC = () => {
   return (
     <MainLayout title="Post Page">
       <h1>Post page {router.query.postId}</h1>
-      <>
-        <div>Title : {state.title && state.title}</div>
-        <div>Body : {state.body && state.body}</div>
-        <div>
-          comments
-          {state.comments &&
-            state.comments.map((comment) => (
-              <div key={comment.postId}>{comment.body}</div>
-            ))}
-        </div>
-      </>
+
+      <div>Title : {state.title && state.title}</div>
+      <div>Body : {state.body && state.body}</div>
+      <div>
+        Comments : {state.comments.length}
+        {state.comments &&
+          state.comments.map((comment) => (
+            <div key={comment.postId}>{comment.body}</div>
+          ))}
+      </div>
     </MainLayout>
   );
 };
