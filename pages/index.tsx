@@ -1,12 +1,12 @@
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
 import MainLayout from "../components/MainLayout";
 import { requestPosts } from "../redux/action/action";
 import { RootStore } from "../redux/redux-store";
-import { PostsType } from "../redux/types/types";
+import { initialStateT, PostsType } from "../redux/types/types";
 
 const Div = styled.div`
   margin: 15px 10px;
@@ -19,7 +19,7 @@ const Text = styled.div`
 
 const latestPosts: React.FC = () => {
   const dispatch = useDispatch();
-  const state = useSelector((state: RootStore[]) => state.posts);
+  const state: initialStateT = useSelector((state: RootStore[]) => state.posts);
 
   useEffect(() => {
     dispatch(requestPosts());
@@ -28,11 +28,13 @@ const latestPosts: React.FC = () => {
   return (
     <MainLayout title="Latest Posts">
       <h1>Hello Nest.js</h1>
+      {state.loading && "Загрузка!"}
+      {state.faile && "Ошибка!"}
 
       {state.posts.map((posts: PostsType) => (
-        <Link href={`/posts/${posts.id}`}>
+        <Link key={posts.id} href={`/posts/${posts.id}`}>
           <a>
-            <Div key={posts.id}>
+            <Div>
               <Text>Title : {posts.title}</Text>
               <Text>Body : {posts.body}</Text>
             </Div>

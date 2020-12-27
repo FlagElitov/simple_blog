@@ -5,6 +5,7 @@ import {
   postsSuccess,
   postsLoading,
   postsFail,
+  POST_POSTS,
 } from "../action/action";
 
 const takeEveryUp: any = takeEvery;
@@ -27,22 +28,20 @@ function* sagaWorkerGetPosts() {
 }
 
 export default function* root() {
-  yield all([fork(sagaWatcherGetPosts)]);
+  yield all([fork(sagaWatcherGetPosts), fork(sagaWatcherPost)]);
 }
 
-// export function* sagaWatcherGetPosts() {
-//   yield takeEveryUp(REQUEST_POSTS, sagaWorkerGetPosts);
-// }
+export function* sagaWatcherPost() {
+  yield takeEveryUp(POST_POSTS, sagaWorkerPosts);
+}
 
-// function* sagaWorkerGetPosts({ pokemonName }: { pokemonName: any }) {
-//   try {
-//     yield put(postsLoading());
-//     const payload = yield call(
-//       axios.get,
-//       `https://simple-blog-api.crew.red/posts`
-//     );
-//     yield put(postsSuccess(payload.data));
-//   } catch (e) {
-//     yield put(postsFail());
-//   }
-// }
+function* sagaWorkerPosts({ title, body }: { title: string; body: string }) {
+  try {
+    const payload = yield call(
+      axios.post,
+      `https://simple-blog-api.crew.red/posts`,
+      { title, body }
+    );
+    yield put(postsSuccess(payload.data));
+  } catch (e) {}
+}

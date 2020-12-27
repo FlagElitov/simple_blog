@@ -11,6 +11,7 @@
     "@types/axios": "^0.14.0",
     "@types/react-redux": "^7.1.14",
     "@types/redux-saga": "^0.10.5",
+    "@types/styled-components": "^5.1.7",
     "axios": "^0.21.1",
     "next": "10.0.4",
     "next-redux-wrapper": "^6.0.2",

@@ -3,18 +3,29 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 import MainLayout from "../../components/MainLayout";
-import { StateTypes } from "./types";
 
 interface Router {
   query: {
     postId?: string;
   };
 }
+interface StateTypes {
+  title: string;
+  body: string;
+  id: number;
+  comments: commenstTypes[];
+}
+
+interface commenstTypes {
+  postId: number;
+  body: string;
+  id: number;
+}
 
 const PostPage: React.FC = () => {
   const router: Router = useRouter();
 
-  const [state, setState] = useState<StateTypes>();
+  const [state, setState] = useState<StateTypes | undefined>();
   console.log(state);
   useEffect(() => {
     axios
@@ -29,15 +40,17 @@ const PostPage: React.FC = () => {
   return (
     <MainLayout title="Post Page">
       <h1>Post page {router.query.postId}</h1>
-      <div>{state && state.title}</div>
-      <div>{state && state.body}</div>
-      <div>
-        {state.comments
-          ? state.comments.map((comment) => (
+      <>
+        <div>Title : {state.title && state.title}</div>
+        <div>Body : {state.body && state.body}</div>
+        <div>
+          comments
+          {state.comments &&
+            state.comments.map((comment) => (
               <div key={comment.postId}>{comment.body}</div>
-            ))
-          : "Коментариев нет"}
-      </div>
+            ))}
+        </div>
+      </>
     </MainLayout>
   );
 };
