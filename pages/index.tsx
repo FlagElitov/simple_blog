@@ -1,28 +1,21 @@
 import Link from "next/link";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { NextPage } from "next";
+import axios from "axios";
 
 import MainLayout from "../components/MainLayout";
-import { requestPosts } from "../redux/action/action";
-import { RootStore } from "../redux/redux-store";
-import { initialStateT, PostsType } from "../redux/types/types";
+import { PostsType } from "../redux/types/types";
 import styles from "../styles/index.module.css";
 
-const latestPosts: React.FC = () => {
-  const dispatch = useDispatch();
-  const state: initialStateT = useSelector((state: RootStore[]) => state.posts);
+interface Props {
+  postsData: PostsType[];
+}
 
-  const posts = state.posts.reverse();
-
-  useEffect(() => {
-    dispatch(requestPosts());
-  }, []);
+const latestPosts: NextPage<Props> = ({ postsData }) => {
+  const posts = postsData;
 
   return (
     <MainLayout title="Latest Posts">
       <h1>Blog</h1>
-      {state.loading && "Загрузка!"}
-      {state.faile && "Ошибка!"}
 
       {posts.map((posts: PostsType) => (
         <div key={posts.id} className={styles.posts}>
@@ -37,4 +30,11 @@ const latestPosts: React.FC = () => {
     </MainLayout>
   );
 };
+
+latestPosts.getInitialProps = async () => {
+  const res = await axios.get(`https://simple-blog-api.crew.red/posts`);
+
+  return { postsData: res.data };
+};
+
 export default latestPosts;

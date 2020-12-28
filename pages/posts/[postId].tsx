@@ -1,15 +1,10 @@
 import axios from "axios";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import styles from "../../styles/index.module.css";
+import { NextPage } from "next";
 
+import styles from "../../styles/index.module.css";
 import MainLayout from "../../components/MainLayout";
 
-interface Router {
-  query: {
-    postId?: string;
-  };
-}
 interface StateTypes {
   title: string;
   body: string;
@@ -23,22 +18,18 @@ interface commenstTypes {
   id: number;
 }
 
-const PostPage = () => {
-  const router: Router = useRouter();
+interface Props {
+  posts: StateTypes;
+}
 
+const PostPage: NextPage<Props> = ({ posts }) => {
   const [state, setState] = useState<StateTypes>({
     title: "",
     body: "",
     id: 0,
   });
   useEffect(() => {
-    axios
-      .get(
-        `https://simple-blog-api.crew.red/posts/${router.query.postId}?_embed=comments`
-      )
-      .then((res) => {
-        setState(res.data);
-      });
+    setState(posts);
   }, []);
 
   return (
@@ -62,6 +53,14 @@ const PostPage = () => {
       </div>
     </MainLayout>
   );
+};
+
+PostPage.getInitialProps = async (ctx) => {
+  const res = await axios.get(
+    `https://simple-blog-api.crew.red/posts/${ctx.query.postId}?_embed=comments`
+  );
+
+  return { posts: res.data };
 };
 
 export default PostPage;
